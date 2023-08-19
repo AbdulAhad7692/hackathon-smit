@@ -81,9 +81,9 @@ label {
 
 .btn {
     padding: 5px 25px;
-    background: black;
+    background: blueviolet;
     color: white;
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 18px;
     text-transform: uppercase;
     border: none;
