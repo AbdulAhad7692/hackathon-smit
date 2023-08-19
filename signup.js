@@ -22,7 +22,7 @@ const signupButton = document.getElementById('signup-button');
 
 
 signupButton.addEventListener('click', async (e) => {
-    
+
     const firstName = document.getElementById('get-firstname').value;
     const lastName = document.getElementById('get-lastname').value;
     const email = document.getElementById('get-email').value;
@@ -50,14 +50,11 @@ signupButton.addEventListener('click', async (e) => {
         const user = userCredential.user;
 
 
-
-        const userRef = doc(db, 'users', user.uid);
-        await setDoc(userRef, {
+        const collectionRef = collection(db, 'users');
+        await addDoc(collectionRef, {
             firstName: firstName,
             lastName: lastName,
             email: email,
-
-
         });
 
         console.log("Data written successfully");

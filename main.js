@@ -1,32 +1,44 @@
 
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"
-import { doc, getFirestore, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js"
+// // Import Firebase modules
 
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+import { doc, getFirestore, getDoc, updateDoc, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+// import moment from 'moment'; // Import the moment library for date formatting
+
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB8Hlp5PoKbOK0Ca97jZIvtcj-hyz-d3zo",
-    authDomain: "chat-app-via-login-signup.firebaseapp.com",
-    databaseURL: "https://chat-app-via-login-signup-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "chat-app-via-login-signup",
-    storageBucket: "chat-app-via-login-signup.appspot.com",
-    messagingSenderId: "702334443657",
-    appId: "1:702334443657:web:e30aa142c57c82b5c32658",
-    measurementId: "G-XZJ1WD59HV"
+        authDomain: "chat-app-via-login-signup.firebaseapp.com",
+        databaseURL: "https://chat-app-via-login-signup-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "chat-app-via-login-signup",
+        storageBucket: "chat-app-via-login-signup.appspot.com",
+        messagingSenderId: "702334443657",
+        appId: "1:702334443657:web:e30aa142c57c82b5c32658",
+        measurementId: "G-XZJ1WD59HV"
 };
 
-const app = initializeApp(firebaseConfig)
-const auth = getAuth(app)
+// Initialize Firebase app
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Logout Button
+
 const logoutButton = document.getElementById('logout-button');
+
+// Add click event listener to the logout button
 
 logoutButton.addEventListener('click', (e) => {
     signOut(auth)
         .then(() => {
             // Sign-out successful.
-            window.location = 'login.html'
-        }).catch((error) => {
+            window.location = 'login.html'; // Redirect to login page after sign-out
+        })
+        .catch((error) => {
             // An error happened.
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -36,6 +48,8 @@ logoutButton.addEventListener('click', (e) => {
 
 let user;
 let userFullName;
+
+// Listen for changes in the user's authentication state
 
 auth.onAuthStateChanged((currentUser) => {
     user = currentUser;
@@ -68,7 +82,6 @@ auth.onAuthStateChanged((currentUser) => {
 });
 
 // Text area form validation
-
 const textarea = document.getElementById('textarea-input');
 const charCount = document.getElementById('charCount');
 
@@ -88,10 +101,36 @@ textarea.addEventListener('input', function () {
     charCount.textContent = `Characters remaining: ${3000 - textLength}`;
 });
 
-const publishBlog = document.getElementById('publish-blog')
+// Publish Blog Button
 
+function makeBlogEditable(blogItem) {
+    const blogText = blogItem.querySelector('.textareavalue');
+
+    blogItem.querySelector('.edit-btn').addEventListener('click', () => {
+        const isEditable = blogText.getAttribute('contenteditable') === 'true';
+        blogText.contentEditable = !isEditable;
+
+        const editButton = blogItem.querySelector('.edit-btn');
+        editButton.textContent = isEditable ? 'Edit' : 'Save';
+
+        
+        if (blogText.contentEditable) {
+            blogText.style.border = '1px solid #ccc';
+            blogText.style.padding = '4px';
+        } else {
+            blogText.style.border = 'none';
+            blogText.style.padding = '0';
+        }
+    });
+
+}
+
+
+
+const publishBlog = document.getElementById('publish-blog');
+
+// Add click event listener to the "Publish Blog" button
 publishBlog.addEventListener('click', async () => {
-
     if (!user) {
         console.error('User is not defined');
         return;
@@ -100,31 +139,31 @@ publishBlog.addEventListener('click', async () => {
     const title = document.getElementById('title-input').value;
     const textarea = document.getElementById('textarea-input').value;
 
-    let blogItem = document.createElement('li')
-    let date = new Date()
-    blogItem.className = 'list'
+    let blogItem = document.createElement('li');
+    let date = new Date();
+    blogItem.className = 'list';
 
     if (title.trim() === '' || textarea.trim() === '') {
         alert('Both Title and Textarea are required.');
-        return
+        return;
     }
     if (title.trim() === '') {
-        alert('Enter Title First')
-        return
+        alert('Enter Title First');
+        return;
     }
     if (textarea.trim() === '') {
-        alert('Enter Title First')
+        alert('Enter Textarea First'); // Corrected the alert message
     }
     if (title.length < 5 || title.length > 50) {
-        alert('Title should be between 5 and 50 characters')
-        return
+        alert('Title should be between 5 and 50 characters');
+        return;
     }
     if (textarea.length < 100) {
-        alert('Blog should be at least 100 characters long')
-        return
+        alert('Blog should be at least 100 characters long');
+        return;
     }
     if (textarea.length > 3000) {
-        alert('Blog should not exceed 3000 characters long')
+        alert('Blog should not exceed 3000 characters long');
     }
     blogItem.innerHTML = `
     <div class="uploaded-blog">
@@ -134,32 +173,35 @@ publishBlog.addEventListener('click', async () => {
                 <div class="title-div">
                     <p class="title">${title}</p>
                 </div>
-                <p class="name-date">${userFullName} on ${moment(date).format('lll')}</p >
-            </div >
-        </div >
+                <p class="name-date">${userFullName} on ${moment(date).format('lll')}</p>
+            </div>
+        </div>
         <div class="blogpubmain">
-            <p class='textareavalue'>${textarea}</p>
+            <p class='textareavalue' id='blog-textarea'>${textarea}</p>
         </div>
         <div class='btns'>
-        <button class='edit-btn'>Edit</button>
-        <button class='delete-btn'>Delete</button>
+            <button class='edit-btn'>Edit</button>
+            <button class='delete-btn'>Delete</button>
         </div>
-        
-    </div >
-        `;
+    </div>
+    `;
+
+    const blogText = blogItem.querySelector('#blog-textarea');
+
+    makeBlogEditable(blogItem);
+
     const blogList = document.getElementById('list');
     blogList.appendChild(blogItem);
 
-    // Add last added item at the top
     blogList.insertBefore(blogItem, blogList.firstChild);
 
-    // Empty input fields
     document.getElementById('title-input').value = '';
     document.getElementById('textarea-input').value = '';
-
-    const blogRef = doc(db, 'blog', user.uid);
-    await setDoc(blogRef, {
+    const collectionRef = collection(db, 'blog'); // Reference to the "blog" collection
+    await addDoc(collectionRef, {
+        userId: user.uid,
         title: title,
         blog: textarea,
+
     });
 });
