@@ -1,0 +1,102 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+.nav {
+    height: 40px;
+    background-color: blueviolet;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-btn {
+    background-color: blueviolet;
+    height: 30px;
+    width: 60px;
+    margin-top: 5px;
+    color: white;
+    border: 2px solid white;
+}
+
+.nav-text {
+    color: white;
+    font-size: 24px;
+    margin-top: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+body{
+    background-color: rgb(238, 238, 238);
+}
+
+.form {
+    background-color: rgb(255, 255, 255);   
+    width: 400px;
+    border-radius: 10px;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.element {
+    position: relative;
+    margin-left: 20px;
+}
+
+.element input {
+    width: 80%;
+    height: 40px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background-color: rgb(226, 226, 226);
+    border: 2px solid black;
+    padding-left: 50px;
+    letter-spacing: 1px;
+}
+
+.element span {
+    position: absolute;
+    left: 20px;
+    top: 12px;
+    font-size: 18px;
+}
+
+.btn {
+    padding: 5px 25px;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: none;
+    /* margin-top: 5px; */
+    cursor: pointer;
+    margin-left: 35%;
+    margin-bottom: 10px;
+}
+
+.btn:active {
+    transform: scale(1.01);
+}
+a{
+    color: white;
+    text-decoration: none;   
+}

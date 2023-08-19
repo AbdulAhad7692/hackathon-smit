@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <p class="nav-text">Personal Blogging App</p>
+            <button class="nav-btn"><a href="login.html">Login</a></button>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <div class="outer">
+            <div class="form">
+                <label>Signup Form</label>
+                <div class="element">
+                    <input class="input" id="get-firstname" placeholder="First Name" required minlength="3"
+                        maxlength="20" type="text">
+                    <span class="fas fa-user"></span>
+                </div>
+
+                <div class="element">
+                    <input class="input" id="get-lastname" placeholder="Last Name" required minlength="3" maxlength="20"
+                        type="text">
+                    <span class="fas fa-user"></span>
+                </div>
+
+                <div class="element">
+                    <input class="input" id="get-email" placeholder="Enter your email" type="text">
+                    <span class="fas fa-envelope"></span>
+                </div>
+
+                <div class="element">
+                    <input class="input" id="get-password" placeholder="Enter your password" type="password">
+                    <span class="fas fa-lock"></span>
+                </div>
+
+                <div class="element">
+                    <input class="input" id="get-repeat-password" placeholder="Repeat your password" type="password">
+                    <span class="fas fa-lock"></span>
+                </div>
+
+                <button class="btn" id="signup-button">SignUp</button>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <script src="signup.js" type="module"></script>
+</body>
+
+</html>
