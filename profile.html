@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Profile</h1>
+    </header>
+
+    <content>
+      <div id="dp">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuDu58p--GPP9n5ZmJsJPrCzAv_h0h53YgnQ&usqp=CAU"
+          alt=""
+        />
+      </div>
+
+      <div class="formDiv">
+        <form onsubmit="updatePassword(event)">
+          <div class="inputDiv">
+            <input type="text" id="oldPass" placeholder="Old password" />
+            <input type="text" id="newPass" placeholder="New Password" />
+            <input type="text" id="confirmPass" placeholder="Repeat password" />
+          </div>
+
+          <button type="submit">Update Password</button>
+        </form>
+      </div>
+    </content>
+    <script type="module" src="profile.js"></script>
+  </body>
+</html>
